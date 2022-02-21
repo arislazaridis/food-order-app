@@ -1,12 +1,12 @@
 import classes from "./MealsItem.module.css";
-import { useEffect } from "react";
+
 import MealItemForm from "./MealItemForm";
 import { connect } from "react-redux";
 import { setCartData } from "../../models/cart/actions";
 
 function MealItem(props) {
   // const price = `$${props.price.toFixed(2)}`;
-  const { setCartData, itemAmount } = props;
+  const { setCartData } = props;
 
   //function to add item
 
@@ -17,8 +17,6 @@ function MealItem(props) {
       itemPrice: props.price,
     });
   };
-
-  //
 
   return (
     <li className={classes.meal}>
