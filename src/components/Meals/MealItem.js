@@ -1,22 +1,25 @@
-import React from "react";
 import classes from "./MealsItem.module.css";
+import { useEffect } from "react";
 import MealItemForm from "./MealItemForm";
-import { useContext } from "react";
-import { CartContext } from "../../store/CartContext";
+import { connect } from "react-redux";
+import { setCartData } from "../../models/cart/actions";
 
 function MealItem(props) {
-  const price = `$${props.price.toFixed(2)}`;
-  const { cartItemsAmount, setCartItemsAmount } = useContext(CartContext);
-  const addToCartHandler = (amount) => {
-    const addItem = {
-      id: props.id,
-      name: props.name,
-      amount: amount,
-      price: props.price,
-    };
+  // const price = `$${props.price.toFixed(2)}`;
+  const { setCartData, itemAmount } = props;
 
-    console.log(addItem);
+  //function to add item
+
+  const addToCartHandler = (amount) => {
+    setCartData({
+      itemName: props.name,
+      itemAmount: parseInt(amount),
+      itemPrice: props.price,
+    });
   };
+
+  //
+
   return (
     <li className={classes.meal}>
       <div>
@@ -31,4 +34,21 @@ function MealItem(props) {
   );
 }
 
-export default MealItem;
+const mapStateToProps = (state) => {
+  return {
+    itemId: state.cart.cartData.id,
+    itemName: state.cart.cartData.name,
+    itemAmount: state.cart.cartData.amount,
+    itemDescription: state.cart.cartData.description,
+    itemPrice: state.cart.cartData.price,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatching plain actions
+    setCartData: (payload) => dispatch(setCartData(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MealItem);
