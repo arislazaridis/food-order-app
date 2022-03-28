@@ -6,13 +6,17 @@ import HeaderCartButton from "./HeaderCartButton";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const amountItems = useSelector((state) => state.cart.cartData.itemAmount);
+  const amountItems = useSelector((state) => state.shop.cart.qty);
+
+  const totalAmount = useSelector((state) => state.shop.cart.qty);
+
+  console.log(totalAmount);
 
   return (
     <Fragment>
       <header className={classes.header}>
         <h1>ReactMeals</h1>
-        <HeaderCartButton totalAmount={amountItems} />
+        <HeaderCartButton totalAmount={totalAmount} />
       </header>
       <div className={classes["main-image"]}>
         <img src={mealsImage} alt="A table of delicious food!" />

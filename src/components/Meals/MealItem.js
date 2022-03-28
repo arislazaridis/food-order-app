@@ -1,21 +1,29 @@
 import classes from "./MealsItem.module.css";
-
 import MealItemForm from "./MealItemForm";
 import { connect } from "react-redux";
-import { setCartData } from "../../models/cart/actions";
 
 function MealItem(props) {
   // const price = `$${props.price.toFixed(2)}`;
-  const { setCartData } = props;
+  // const {} = props;
+  // const {
+  //   setCartData,
+  //   setCartTotalAmount,
+  //   itemId,
+  //   itemName,
+  //   itemAmount,
+  //   itemDescription,
+  //   itemPrice,
+  //   totalAmount,
+  // } = props;
 
   //function to add item
-
   const addToCartHandler = (amount) => {
-    setCartData({
-      itemName: props.name,
-      itemAmount: parseInt(amount),
-      itemPrice: props.price,
-    });
+    // setCartData({
+    //   itemName: props.name,
+    //   itemAmount: parseInt(amount),
+    //   itemPrice: props.price,
+    // });
+    // setCartTotalAmount(amount);
   };
 
   return (
@@ -32,21 +40,24 @@ function MealItem(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    itemId: state.cart.cartData.id,
-    itemName: state.cart.cartData.name,
-    itemAmount: state.cart.cartData.amount,
-    itemDescription: state.cart.cartData.description,
-    itemPrice: state.cart.cartData.price,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     itemId: state.cartData.itemId,
+//     itemName: state.cartData.itemName,
+//     itemAmount: state.cartData.itemAmount,
+//     itemDescription: state.cartData.itemDescription,
+//     itemPrice: state.cartData.itemPrice,
+//     totalAmount: state.cartTotalAmount.totalAmount,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // dispatching plain actions
-    setCartData: (payload) => dispatch(setCartData(payload)),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     // dispatching plain actions
+//     setCartData: (payload) => dispatch(setCartData(payload)),
+//     setCartTotalAmount: (payload) => dispatch(setCartTotalAmount(payload)),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MealItem);
+//connect(mapDispatchToProps, mapStateToProps)
+export default MealItem;
