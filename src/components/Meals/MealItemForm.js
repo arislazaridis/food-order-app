@@ -1,9 +1,13 @@
 import React, { useRef } from "react";
 import classes from "./MealItemForm.module.css";
 import Input from "../UI/Input";
+import { ADD_TO_CART, ADJUST_QTY } from "../../models/Shopping/shopping-types";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../models/Shopping/shopping-actions";
 
 function MealItemForm(props) {
   const amountInputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +32,9 @@ function MealItemForm(props) {
         }}
         ref={amountInputRef}
       />
-      <button type="submit">+ Add</button>
+      <button type="submit" onClick={() => dispatch(addToCart(props.id))}>
+        + Add
+      </button>
     </form>
   );
 }

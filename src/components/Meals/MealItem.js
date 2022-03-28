@@ -1,6 +1,6 @@
 import classes from "./MealsItem.module.css";
 import MealItemForm from "./MealItemForm";
-import { connect } from "react-redux";
+import { addToCart } from "../../models/Shopping/shopping-actions";
 
 function MealItem(props) {
   // const price = `$${props.price.toFixed(2)}`;
@@ -17,7 +17,9 @@ function MealItem(props) {
   // } = props;
 
   //function to add item
-  const addToCartHandler = (amount) => {
+  const addToCartHandler = (amount, id) => {
+    console.log(amount);
+
     // setCartData({
     //   itemName: props.name,
     //   itemAmount: parseInt(amount),
@@ -34,7 +36,7 @@ function MealItem(props) {
         <div className={classes.price}>{props.price}</div>
       </div>
       <div>
-        <MealItemForm onAddtoCart={addToCartHandler} />
+        <MealItemForm onAddtoCart={addToCartHandler} id={props.id} />
       </div>
     </li>
   );
