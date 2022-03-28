@@ -1,11 +1,10 @@
 import React from "react";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
-function AvailableMeals(props) {
-  const { products } = props;
-  console.log(products);
+function AvailableMeals() {
+  const products = useSelector((state) => state.shop.products);
   const mealsList = products.map((meal) => (
     <MealItem
       key={meal.id}
@@ -23,14 +22,4 @@ function AvailableMeals(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.shop.products,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapDispatchToProps, mapStateToProps)(AvailableMeals);
+export default AvailableMeals;
