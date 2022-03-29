@@ -39,6 +39,7 @@ function MealItemForm(props) {
       >
         + Add
       </button>
+      <button type="submit">- Delete</button>
     </form>
   );
 }
