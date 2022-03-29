@@ -7,27 +7,31 @@ const INITIAL_STATE = {
       name: "Sushi",
       description: "Finest fish and veggies",
       price: 22.99,
+      qty: 0,
     },
     {
       id: "m2",
       name: "Schnitzel",
       description: "A german specialty!",
       price: 16.5,
+      qty: 0,
     },
     {
       id: "m3",
       name: "Barbecue Burger",
       description: "American, raw, meaty",
       price: 12.99,
+      qty: 0,
     },
     {
       id: "m4",
       name: "Green Bowl",
       description: "Healthy...and green...",
       price: 18.99,
+      qty: 0,
     },
   ], // {id,title,descr,price,img}
-  cart: [{ qty: 0 }], // {id,title,descr,price,img,qty}
+  cart: [], // {id,title,descr,price,img,qty}
   currentItem: null,
 };
 
@@ -38,17 +42,22 @@ const shopReducer = (state = INITIAL_STATE, action) => {
       const inCart = state.cart.find((item) =>
         item.id === action.payload.id ? true : false
       );
+      console.log(state.cart);
       // check if item is in cart already
       return {
         ...state,
         cart: inCart
           ? state.cart.map((item) =>
               item.id === action.payload.id
-                ? { ...item, qty: item.qty + 1 }
+                ? {
+                    ...item,
+                    qty: Number(action.payload.qty),
+                  }
                 : item
             )
-          : [...state.cart, { ...item, qty: 1 }],
+          : [...state.cart, { ...item, qty: Number(action.payload.qty) }],
       };
+
     case actionTypes.REMOVE_FROM_CART:
       return {
         ...state,

@@ -8,6 +8,7 @@ import { addToCart } from "../../models/Shopping/shopping-actions";
 function MealItemForm(props) {
   const amountInputRef = useRef(null);
   const dispatch = useDispatch();
+  const { id } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ function MealItemForm(props) {
     const enteredAmount = amountInputRef.current.value;
 
     // setCartItemsAmount(enteredAmount);
-    props.onAddtoCart(enteredAmount);
+    props.onAddtoCart(enteredAmount, id);
   };
 
   return (
@@ -32,7 +33,10 @@ function MealItemForm(props) {
         }}
         ref={amountInputRef}
       />
-      <button type="submit" onClick={() => dispatch(addToCart(props.id))}>
+      <button
+        type="submit"
+        onClick={() => dispatch(addToCart(id, amountInputRef.current.value))}
+      >
         + Add
       </button>
     </form>
