@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import mealsImage from "../../assets/meals.jpg";
+import mealsImage from "../../assets/meals5.gif";
 import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 

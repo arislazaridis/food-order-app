@@ -1,10 +1,12 @@
 import React from "react";
 import classes from "./HeaderCartButton.module.css";
 import CartIcon from "../Cart/CartIcon";
+import Cart from "../Cart/Cart";
 
 function HeaderCartButton(props) {
   const handleSubmit = () => {
     console.log("pigaine stin selida");
+    return <Cart />;
   };
 
   return (
