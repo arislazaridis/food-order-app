@@ -1,0 +1,12 @@
+.registerIcon {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerTxt {
+  border: 1px solid white;
+  padding: 4px;
+  margin: 0;
+}
