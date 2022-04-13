@@ -1,12 +1,15 @@
 import React from "react";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./Register.css";
+import Button from "@mui/material/Button";
 
 function Register() {
   return (
     <div className="registerIcon">
       <HowToRegIcon />
-      <p className="registerTxt">Register</p>
+      <Button className="registerTxt" variant="contained">
+        Register
+      </Button>
     </div>
   );
 }
