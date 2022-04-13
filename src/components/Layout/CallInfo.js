@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import WatchLaterIcon from "@mui/icons-material/WatchLater";
 
 function CallInfo() {
   const dropdownLinkStyle = {
@@ -31,6 +32,13 @@ function CallInfo() {
           <LocationOnIcon />
           ΙΕΡΑ ΟΔΟΣ 313
         </a>
+        <div className="work-hours">
+          <p>Ώρες Εξυπηρέρησης</p>
+          <div className="watchIcon">
+            <WatchLaterIcon />
+            <p>12:00 - 00:30</p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ const INITIAL_STATE = {
       name: "Sushi",
       description: "Finest fish and veggies",
       price: 22.99,
+      img: "https://freepikpsd.com/file/2019/10/sushi-empanizado-png-4-1-Transparent-Images-Free.png",
       qty: 0,
     },
     {
@@ -14,6 +15,7 @@ const INITIAL_STATE = {
       name: "Schnitzel",
       description: "A german specialty!",
       price: 16.5,
+      img: "https://www.picng.com/upload/schnitzel/png_schnitzel_16034.png",
       qty: 0,
     },
     {
@@ -21,6 +23,7 @@ const INITIAL_STATE = {
       name: "Barbecue Burger",
       description: "American, raw, meaty",
       price: 12.99,
+      img: "https://www.seekpng.com/png/full/79-791680_bbq-burger-png-burger-king-bacon-king.png",
       qty: 0,
     },
     {
@@ -28,6 +31,7 @@ const INITIAL_STATE = {
       name: "Green Bowl",
       description: "Healthy...and green...",
       price: 18.99,
+      img: "https://i.dlpng.com/static/png/6943851_preview.png",
       qty: 0,
     },
   ], // {id,title,descr,price,img}

@@ -12,6 +12,7 @@ function MealItem(props) {
   return (
     <li className={classes.meal}>
       <div>
+        <img src={props.image} width="150" height="100"></img>
         <h3>{props.name}</h3>
         <div className={classes.description}>{props.description}</div>
         <div className={classes.price}>{props.price}</div>
