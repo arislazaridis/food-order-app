@@ -12,7 +12,7 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import FormControlLabel from "@mui/material//FormControlLabel";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 
