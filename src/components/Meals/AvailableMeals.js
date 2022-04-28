@@ -7,13 +7,13 @@ import axios from "axios";
 function AvailableMeals() {
   const [dbProducts, setDbProducts] = useState([]);
 
-  const fetchUsers = async () => {
+  const fetchProducts = async () => {
     const response = await axios.get("http://localhost:3001/productslist");
     console.log(response);
     return response.data;
   };
   useEffect(() => {
-    const fetchdata = fetchUsers();
+    const fetchdata = fetchProducts();
   }, []);
 
   const products = useSelector((state) => state.shop.products);
