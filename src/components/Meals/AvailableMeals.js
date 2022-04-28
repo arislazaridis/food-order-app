@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 function AvailableMeals() {
+  const [dbProducts, setDbProducts] = useState([]);
+
+  const fetchUsers = async () => {
+    const response = await axios.get("http://localhost:3001/productslist");
+    console.log(response);
+    return response.data;
+  };
+  useEffect(() => {
+    const fetchdata = fetchUsers();
+  }, []);
+
   const products = useSelector((state) => state.shop.products);
   const mealsList = products.map((meal) => (
     <MealItem

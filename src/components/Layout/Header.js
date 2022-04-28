@@ -25,7 +25,10 @@ function Header() {
     <Fragment>
       <header className={classes.header}>
         <h1>ReactMeals</h1>
-        <div style={{ display: "flex", gap: "24px" }}>
+        <div
+          className={classes.infoHeader}
+          style={{ display: "flex", gap: "24px" }}
+        >
           <CallInfo />
           <Login />
           <Register />

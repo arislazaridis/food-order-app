@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("../server/models/product");
-
+var cors = require("cors");
 require("dotenv").config();
+const router = new express.Router();
 
 const app = express();
 app.use(express.json());
+// app.use(cors());
 
 const port = 3001;
 const uri =
@@ -23,9 +25,13 @@ connection.once("open", () => {
   console.log("MongoDb database connection established successfully");
 });
 
+router.options("/productslist", cors());
+
 app.get("/productslist", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   await Product.find({}, (err, result) => {
     console.log("products from db: ", result);
+
     res.send(result);
   });
 });

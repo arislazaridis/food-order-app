@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
@@ -27,6 +26,10 @@ const productSchema = new Schema({
       if (value < 0) {
         throw new Error("Quantity must be positive number");
       }
+    },
+    img: {
+      type: String,
+      required: false,
     },
   },
 });
