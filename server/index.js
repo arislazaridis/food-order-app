@@ -44,9 +44,11 @@ app.post("/products", async (req, res) => {
       description: req.body.description,
       price: req.body.price,
       qty: req.body.qty,
+      image: req.body.image,
     });
     await Product.create(newProduct);
     res.send("Product added");
+    // res.send(newProduct);
   } catch (err) {
     console.log("error: ", err);
   }

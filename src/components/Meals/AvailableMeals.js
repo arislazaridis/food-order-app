@@ -9,24 +9,36 @@ function AvailableMeals() {
 
   const fetchProducts = async () => {
     const response = await axios.get("http://localhost:3001/productslist");
-    console.log(response);
+    setDbProducts(response.data);
+
     return response.data;
   };
   useEffect(() => {
     const fetchdata = fetchProducts();
   }, []);
 
-  const products = useSelector((state) => state.shop.products);
-  const mealsList = products.map((meal) => (
+  // const products = useSelector((state) => state.shop.products);
+  const mealsList = dbProducts.map((meal) => (
     <MealItem
-      key={meal.id}
-      id={meal.id}
+      key={meal._id}
       name={meal.name}
       description={meal.description}
       price={meal.price}
-      image={meal.img}
+      image={meal.image}
     />
   ));
+
+  // products.map((meal) => (
+
+  //   <MealItem
+  //     key={meal.id}
+  //     id={meal.id}
+  //     name={meal.name}
+  //     description={meal.description}
+  //     price={meal.price}
+  //     image={meal.img}
+  //   />
+  // ));
 
   return (
     <section className={classes.meals}>

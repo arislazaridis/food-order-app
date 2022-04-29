@@ -27,10 +27,10 @@ const productSchema = new Schema({
         throw new Error("Quantity must be positive number");
       }
     },
-    img: {
-      type: String,
-      required: false,
-    },
+  },
+  image: {
+    type: String,
+    required: true,
   },
 });
 
