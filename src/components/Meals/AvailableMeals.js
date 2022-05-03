@@ -2,23 +2,26 @@ import React, { useEffect, useState } from "react";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem";
 import { useSelector } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
+import { connect } from "react-redux";
+import { fetchProducts } from "../../models/Shopping/shopping-actions";
 
-function AvailableMeals() {
-  const [dbProducts, setDbProducts] = useState([]);
+function AvailableMeals({ productsData, fetchProducts }) {
+  // const [dbProducts, setDbProducts] = useState([]);
 
-  const fetchProducts = async () => {
-    const response = await axios.get("http://localhost:3001/productslist");
-    setDbProducts(response.data);
+  // const fetchProducts = async () => {
+  //   const response = await axios.get("http://localhost:3001/productslist");
+  //   setDbProducts(response.data);
 
-    return response.data;
-  };
+  //   return response.data;
+  // };
   useEffect(() => {
-    const fetchdata = fetchProducts();
+    // const fetchdata = fetchProducts();
+    fetchProducts();
   }, []);
 
   // const products = useSelector((state) => state.shop.products);
-  const mealsList = dbProducts.map((meal) => (
+  const mealsList = productsData.products.map((meal) => (
     <MealItem
       key={meal._id}
       name={meal.name}
@@ -47,4 +50,16 @@ function AvailableMeals() {
   );
 }
 
-export default AvailableMeals;
+const mapStateToProps = (state) => {
+  return {
+    productsData: state.shop,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProducts: () => dispatch(fetchProducts()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AvailableMeals);

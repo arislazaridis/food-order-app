@@ -1,5 +1,12 @@
 import * as actionTypes from "./shopping-types";
+import axios from "axios";
 
+export const fetchProductsRequest = (products) => {
+  return {
+    type: actionTypes.FETCH_PRODUCTS_REQUEST,
+    payload: products,
+  };
+};
 export const addToCart = (itemID, value) => {
   return {
     type: actionTypes.ADD_TO_CART,
@@ -33,5 +40,19 @@ export const loadCurrentItem = (item) => {
   return {
     type: actionTypes.LOAD_CURRENT_ITEM,
     payload: item,
+  };
+};
+
+export const fetchProducts = () => {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/productslist")
+      .then((response) => {
+        const products = response.data;
+        dispatch(fetchProductsRequest(products));
+      })
+      .catch((err) => {
+        const errorMsg = err.message;
+      });
   };
 };
