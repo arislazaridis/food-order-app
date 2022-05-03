@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 function Cart(props) {
   const cart = useSelector((state) => state.shop.cart);
-  console.log(cart);
+
   return (
     <li className={classes.meal}>
       <div>

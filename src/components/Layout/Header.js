@@ -14,12 +14,13 @@ function Header() {
 
   useEffect(() => {
     let count = 0;
+
     cart.forEach((item) => {
       count += item.qty;
+      console.log(count, "count");
+      setCartCount(count);
     });
-
-    setCartCount(count);
-  }, [cart, cartCount]);
+  }, [cart, cartCount, setCartCount]);
 
   return (
     <Fragment>
