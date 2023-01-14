@@ -1,4 +1,10 @@
-import { Fragment, useState, useEffect } from "react";
+import {
+  Fragment,
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+} from "react";
 import mealsImage from "../../assets/meals5.gif";
 import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
@@ -7,8 +13,10 @@ import Register from "./Register";
 
 import { useSelector } from "react-redux";
 import CallInfo from "./CallInfo";
+import Cart from "./../Cart/Cart";
 
 function Header() {
+  const CartContext = createContext();
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.shop.cart);
 

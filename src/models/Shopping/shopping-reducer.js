@@ -1,9 +1,13 @@
 import * as actionTypes from "./shopping-types";
+import { PAGES } from "../../config/config";
+import { createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 const INITIAL_STATE = {
   products: [], // {id,title,descr,price,img,qty}
   cart: [], // {id,title,descr,price,img,qty}
   currentItem: null,
+  page: PAGES.HomePage,
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -33,6 +37,12 @@ const shopReducer = (state = INITIAL_STATE, action) => {
                 : item
             )
           : [...state.cart, { ...item, qty: Number(action.payload.qty) }],
+      };
+
+    case actionTypes.GO_TO_PAGE:
+      return {
+        ...state,
+        page: action.payload,
       };
 
     case actionTypes.REMOVE_FROM_CART:

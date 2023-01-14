@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("../server/models/product");
+const User = require("../server/models/user");
 var cors = require("cors");
 require("dotenv").config();
 const router = new express.Router();
@@ -25,6 +26,7 @@ connection.once("open", () => {
   console.log("MongoDb database connection established successfully");
 });
 
+//Products
 router.options("/productslist", cors());
 
 app.get("/productslist", async (req, res) => {
@@ -48,6 +50,35 @@ app.post("/products", async (req, res) => {
     });
     await Product.create(newProduct);
     res.send("Product added");
+    // res.send(newProduct);
+  } catch (err) {
+    console.log("error: ", err);
+  }
+});
+
+//USERS
+router.options("/userslist", cors());
+app.get("/userslist", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  await User.find({}, (err, result) => {
+    console.log("users from db: ", result);
+
+    res.send(result);
+  });
+});
+
+app.post("/user", async (req, res) => {
+  try {
+    console.log("req.body: ", req.body);
+    const newUser = new User({
+      name: req.body.userName,
+      password: req.body.password,
+      email: req.body.email,
+      gender: req.body.gender,
+      phone: req.body.phone,
+    });
+    await User.create(newUser);
+    res.send("User added");
     // res.send(newProduct);
   } catch (err) {
     console.log("error: ", err);

@@ -43,6 +43,13 @@ export const loadCurrentItem = (item) => {
   };
 };
 
+export const goToPage = (payload) => {
+  return {
+    type: actionTypes.GO_TO_PAGE,
+    payload,
+  };
+};
+
 export const fetchProducts = () => {
   return (dispatch) => {
     axios
