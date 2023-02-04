@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import CallInfo from "./CallInfo";
 import Cart from "./../Cart/Cart";
 
-function Header() {
+function Header(props) {
   const CartContext = createContext();
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.shop.cart);

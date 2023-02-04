@@ -6,6 +6,7 @@ export const PAGES = {
   LogInSignUpPage: "LogInSignUpPage",
   UserDataPage: "UserDataPage",
   AllUsersPage: "AllUsersPage",
+  PaymentPage: "PaymentPage",
 };
 
 export default API_URL;

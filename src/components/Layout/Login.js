@@ -18,7 +18,7 @@ const initialErrorStatus = {
   noUser: "",
 };
 
-function Login(props) {
+const Login = (props) => {
   const { username, password, setSignInData, goToPage, setUsersData } = props;
 
   const [errors, setErrors] = useState(initialErrorStatus);
@@ -76,12 +76,13 @@ function Login(props) {
   const [buttonPopup, setButtonPopup] = useState(false);
   const paperStyle = {
     padding: 20,
-    height: "73vh",
+    height: "55vh",
     width: 300,
     margin: "0 auto",
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "8px 0" };
+  const marginTop = { marginTop: 24 };
   return (
     <div className="loginIcon">
       <LoginIcon style={{ color: "white" }} />
@@ -105,6 +106,7 @@ function Login(props) {
               <TextField
                 label="Username"
                 placeholder="Enter username"
+                style={marginTop}
                 fullWidth
                 required
                 value={username}
@@ -113,6 +115,7 @@ function Login(props) {
               <TextField
                 label="Password"
                 placeholder="Enter password"
+                style={marginTop}
                 type="password"
                 value={password}
                 onChange={(e) => handleOnChange("password", e.target.value)}
@@ -126,7 +129,7 @@ function Login(props) {
                 type="submit"
                 color="primary"
                 variant="contained"
-                style={btnstyle}
+                style={marginTop}
                 fullWidth
               >
                 Sign in
@@ -137,7 +140,7 @@ function Login(props) {
       </form>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

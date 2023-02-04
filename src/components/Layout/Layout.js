@@ -6,6 +6,7 @@ import { PAGES } from "../../config/config";
 import Header from "./Header";
 import Meals from "../Meals/Meals";
 import Cart from "../Cart/Cart";
+import Payment from "./Payment";
 
 function Layout(props) {
   const { page, goToPage, setUsersData } = props;
