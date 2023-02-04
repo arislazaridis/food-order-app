@@ -25,7 +25,6 @@ function Header() {
 
     cart.forEach((item) => {
       count += item.qty;
-      console.log(count, "count");
       setCartCount(count);
     });
   }, [cart, cartCount, setCartCount]);

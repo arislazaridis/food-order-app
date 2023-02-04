@@ -3,20 +3,76 @@ import LoginIcon from "@mui/icons-material/Login";
 import "./Login.css";
 import Button from "@mui/material/Button";
 import Popup from "./Popup";
-import {
-  Grid,
-  Paper,
-  Avatar,
-  TextField,
-  Typography,
-  Link,
-} from "@mui/material";
+import { Grid, Paper, Avatar, TextField } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 
-function Login() {
+import axios from "axios";
+import { connect } from "react-redux";
+import { setSignInData } from "./../../models/sign-forms/actions";
+import { API_URL, PAGES } from "./../../config/config";
+import { goToPage } from "./../../models/routing/actions";
+import { setUsersData } from "./../../models/sign-forms/actions";
+
+const initialErrorStatus = {
+  noUser: "",
+};
+
+function Login(props) {
+  const { username, password, setSignInData, goToPage, setUsersData } = props;
+
+  const [errors, setErrors] = useState(initialErrorStatus);
+
+  const handleOnChange = (key, value) => {
+    setSignInData({ key, value });
+  };
+
+  const getData = async (username, password) => {
+    try {
+      console.log(username, password);
+      const response = await axios.get(API_URL, {
+        params: { username: username, password: password },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErrors(initialErrorStatus);
+
+    const userResponse = await getData(username, password);
+
+    if (userResponse.length === 0) {
+      setErrors((state) => ({
+        ...state,
+        noUser: "Wrong username/password",
+      }));
+      goToPage(PAGES.LogInSignUpPage);
+    } else {
+      localStorage.setItem(
+        `login_user`,
+        JSON.stringify({
+          username: userResponse[0].username,
+          password: userResponse[0].password,
+        })
+      );
+      setUsersData({
+        username: username,
+        password: password,
+        fullName: userResponse[0].fullName,
+        age: userResponse[0].age,
+        isAdmin: userResponse[0].isAdmin,
+        id: userResponse[0].id,
+      });
+
+      goToPage(PAGES.UserDataPage);
+    }
+  };
+
   const [buttonPopup, setButtonPopup] = useState(false);
   const paperStyle = {
     padding: 20,
@@ -36,57 +92,70 @@ function Login() {
       >
         Login
       </Button>
-      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-        <Grid>
-          <Paper style={paperStyle}>
-            <Grid align="center">
-              <Avatar style={avatarStyle}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <h2>Sign In</h2>
-            </Grid>
-            <TextField
-              label="Username"
-              placeholder="Enter username"
-              fullWidth
-              required
-            />
-            <TextField
-              label="Password"
-              placeholder="Enter password"
-              type="password"
-              fullWidth
-              required
-            />
-            <FormControlLabel
-              control={<Checkbox name="checkedB" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              color="primary"
-              variant="contained"
-              style={btnstyle}
-              fullWidth
-            >
-              Sign in
-            </Button>
-            <Typography>
-              <Link href="#">Forgot password ?</Link>
-            </Typography>
-            <Typography>
-              {" "}
-              Do you have an account ?
-              <Link href="#">
-                {/* onClick={() => handleChange("event", 1)} */}
-                Sign Up
-              </Link>
-            </Typography>
-          </Paper>
-        </Grid>
-      </Popup>
+      <form onSubmit={handleSubmit}>
+        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+          <Grid>
+            <Paper style={paperStyle}>
+              <Grid align="center">
+                <Avatar style={avatarStyle}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <h2>Sign In</h2>
+              </Grid>
+              <TextField
+                label="Username"
+                placeholder="Enter username"
+                fullWidth
+                required
+                value={username}
+                onChange={(e) => handleOnChange("username", e.target.value)}
+              />
+              <TextField
+                label="Password"
+                placeholder="Enter password"
+                type="password"
+                value={password}
+                onChange={(e) => handleOnChange("password", e.target.value)}
+                fullWidth
+                required
+              />
+              {errors.noUser ? (
+                <div style={{ color: "red" }}>{`${errors.noUser}`}</div>
+              ) : null}
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                style={btnstyle}
+                fullWidth
+              >
+                Sign in
+              </Button>
+            </Paper>
+          </Grid>
+        </Popup>
+      </form>
     </div>
   );
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    username: state.signForms.signInData.username,
+    password: state.signForms.signInData.password,
+    fullName: state.signForms.usersData.fullName,
+    isAdmin: state.signForms.usersData.isAdmin,
+    age: state.signForms.usersData.age,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatching plain actions
+    setSignInData: (payload) => dispatch(setSignInData(payload)),
+    setUsersData: (payload) => dispatch(setUsersData(payload)),
+    goToPage: (payload) => dispatch(goToPage(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

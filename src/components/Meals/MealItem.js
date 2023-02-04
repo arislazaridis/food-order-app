@@ -5,8 +5,8 @@ import { addToCart } from "../../models/Shopping/shopping-actions";
 function MealItem(props) {
   //function to add item
   const addToCartHandler = (amount, id) => {
-    console.log(amount);
-    console.log(id, amount);
+    // console.log(amount);
+    // console.log(id, amount);
   };
 
   return (

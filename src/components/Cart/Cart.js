@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import classes from "./../Meals/MealsItem.module.css";
 import { useSelector } from "react-redux";
 import MealItem from "./../Meals/MealItem";
-import { WifiLock } from "@mui/icons-material";
 
 function Cart(props) {
   const cart = useSelector((state) => state.shop.cart);
