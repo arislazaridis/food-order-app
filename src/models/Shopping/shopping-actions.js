@@ -75,6 +75,7 @@ export const fetchProducts = () => {
       })
       .catch((err) => {
         const errorMsg = err.message;
+        console.log(errorMsg);
       });
   };
 };

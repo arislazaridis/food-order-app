@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import MealItem from "./../Meals/MealItem";
 import Payment from "../Layout/Payment";
 
-function Cart(props) {
+function Cart() {
   const cart = useSelector((state) => state.shop.cart);
 
   const cartPrices = cart.map((el) => el.price * el.qty);

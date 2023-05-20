@@ -8,8 +8,7 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import { useDispatch } from "react-redux";
 import Dialog from "@mui/material/Dialog";
 
-import { API_URL, PAGES } from "./../../config/config";
-import { goToPage } from "../../models/routing/actions";
+import { API_URL } from "./../../config/config";
 import Popup from "./Popup";
 import { setSignUpData, setUsersData } from "../../models/sign-forms/actions";
 
@@ -45,10 +44,6 @@ const Register = (props) => {
   const [errors, setErrors] = useState(initialErrorStatus);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-
-  const handleOnChange = (key, value) => {
-    dispatch(setSignUpData({ key, value }));
-  };
 
   const validateFields = async () => {
     setErrors(initialErrorStatus);
@@ -141,7 +136,7 @@ const Register = (props) => {
 
         setOpenDialog(true);
       })
-      .catch((err) =>
+      .catch(() =>
         setErrors((state) => ({
           ...state,
           somethingWentWrong: "Something Went Wrong. Try again.",

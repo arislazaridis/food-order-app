@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import API_URL from "./../../config/config";
 
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -13,9 +12,9 @@ import { setUsersData } from "../../models/sign-forms/actions";
 
 function AllUsersPage(props) {
   const { setUsersData } = props;
-  const [users, setUsers] = useState([]);
-  const [hasError, setHasError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [setUsers] = useState([]);
+  const [setHasError] = useState(false);
+  const [setLoading] = useState(false);
 
   const fetchData = async () => {
     setLoading(true);
@@ -33,7 +32,7 @@ function AllUsersPage(props) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <TableContainer component={Paper}>

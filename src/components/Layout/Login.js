@@ -16,15 +16,10 @@ const initialErrorStatus = {
   noUser: "",
 };
 
-const initialSuccessStatus = {
-  user: "",
-};
-
 const Login = (props) => {
   const { username, password, setSignInData, goToPage, setUsersData } = props;
 
   const [errors, setErrors] = useState(initialErrorStatus);
-  const [success, setSuccess] = useState(initialSuccessStatus);
   const [openDialog, setOpenDialog] = useState(false);
   const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -85,7 +80,6 @@ const Login = (props) => {
     margin: "0 auto",
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
-  const btnstyle = { margin: "8px 0" };
   const marginTop = { marginTop: 24 };
 
   return (

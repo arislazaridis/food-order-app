@@ -20,18 +20,18 @@ function CallInfo() {
         <AddIcCallIcon />
       </Button>
       <div className="dropdown-content">
-        <a href="#" style={dropdownLinkStyle}>
+        <a href="tel:+12102911951" style={dropdownLinkStyle}>
           <CallIcon />
           210-2911951
         </a>
-        <a href="#" style={dropdownLinkStyle}>
+        <a href="mailto:arislazaridis@yahoo.com" style={dropdownLinkStyle}>
           <EmailIcon />
           arislazaridis@yahoo.com
         </a>
-        <a href="#" style={dropdownLinkStyle}>
+        <span style={dropdownLinkStyle}>
           <LocationOnIcon />
           ΙΕΡΑ ΟΔΟΣ 313
-        </a>
+        </span>
         <div className="work-hours">
           <p>Ώρες Εξυπηρέρησης</p>
           <div className="watchIcon">

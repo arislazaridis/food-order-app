@@ -1,11 +1,9 @@
 import * as actionTypes from "./shopping-types";
 import { PAGES } from "../../config/config";
-import { createSlice } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
 
 const INITIAL_STATE = {
-  products: [], // {id,title,descr,price,img,qty}
-  cart: [], // {id,title,descr,price,img,qty}
+  products: [],
+  cart: [],
   currentItem: null,
   page: PAGES.HomePage,
 };

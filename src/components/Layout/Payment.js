@@ -3,7 +3,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import "./Login.css";
 import Button from "@mui/material/Button";
 import Popup from "./Popup";
-import { Grid, Paper, Avatar, TextField } from "@mui/material";
+import { Grid, Avatar } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -33,12 +33,6 @@ function Payment(props) {
     padding: "1em 0.5em",
     borderRadius: "5px",
     textAlign: "center",
-  };
-  const particlesJs = {
-    position: "absolute",
-    height: "100vh",
-    zIndex: "-1",
-    width: "100%",
   };
 
   const onClickReturn = () => {

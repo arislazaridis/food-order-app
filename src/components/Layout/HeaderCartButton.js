@@ -4,17 +4,14 @@ import CartIcon from "../Cart/CartIcon";
 import { PAGES } from "./../../config/config";
 
 import { useDispatch } from "react-redux";
-import {
-  goToPage,
-  totalCartCount,
-} from "../../models/Shopping/shopping-actions";
+import { goToPage } from "../../models/Shopping/shopping-actions";
 
 function HeaderCartButton(props) {
   const { totalAmount } = props;
 
   const dispatch = useDispatch();
 
-  const [displayCart, setDisplayCart] = useState(false);
+  const [setDisplayCart] = useState(false);
 
   const handleSubmit = () => {
     if (totalAmount > 0) {

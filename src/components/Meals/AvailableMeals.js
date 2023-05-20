@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem";
-import { useSelector } from "react-redux";
-// import axios from "axios";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../models/Shopping/shopping-actions";
 
 function AvailableMeals({ productsData, fetchProducts }) {
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
-  // const products = useSelector((state) => state.shop.products);
   const mealsList = productsData.products.map((meal) => (
     <MealItem
       key={meal._id}

@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, createContext } from "react";
+import { Fragment, useState, useEffect } from "react";
 import mealsImage from "../../assets/meals5.gif";
 import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
@@ -25,7 +25,7 @@ function Header(props) {
       dispatch(totalCartCount(count));
       setCartCount(count);
     });
-  }, [cart, cartCount, setCartCount, totalCartCount]);
+  }, [cart, cartCount, setCartCount, dispatch]);
 
   return (
     <Fragment>
