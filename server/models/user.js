@@ -15,7 +15,7 @@ const userSchema = new Schema({
     required: true,
     validate(value) {
       if (value < 0) {
-        throw new Error("Password must be positive number");
+        throw new Error("Password must be a positive number");
       }
     },
   },
@@ -24,7 +24,7 @@ const userSchema = new Schema({
     default: 0,
     validate(value) {
       if (value < 0) {
-        throw new Error("Quantity must be positive number");
+        throw new Error("Phone must be a positive number");
       }
     },
   },
@@ -34,6 +34,6 @@ const userSchema = new Schema({
   },
 });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

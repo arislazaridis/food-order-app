@@ -2,40 +2,45 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("../server/models/product");
 const User = require("../server/models/user");
-var cors = require("cors");
+const cors = require("cors");
 require("dotenv").config();
 const router = new express.Router();
 
 const app = express();
 app.use(express.json());
-// app.use(cors());
+app.use(cors()); // Enable CORS
 
 const port = 3001;
-const uri =
-  "mongodb+srv://admin:admin@cluster0.duarj.mongodb.net/food-orders?retryWrites=true&w=majority";
-// process.env.MONGODB_CONNECTION_STRING;
+const uri = process.env.MONGODB_CONNECTION_STRING;
 
-//connection with mongoDb
-mongoose.connect(uri, (err) => {
-  if (err) throw err;
-  console.log("Connected to MongoDb");
-});
+// Connection with MongoDB
+mongoose
+  .connect(uri)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+  });
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-  console.log("MongoDb database connection established successfully");
+  console.log("MongoDB database connection established successfully");
 });
 
-//Products
+// Products
 router.options("/productslist", cors());
 
 app.get("/productslist", async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  await Product.find({}, (err, result) => {
-    console.log("products from db: ", result);
-
-    res.send(result);
-  });
+  try {
+    const products = await Product.find({});
+    console.log("Products from DB: ", products);
+    res.send(products);
+  } catch (err) {
+    console.error("Error retrieving products from DB: ", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.post("/products", async (req, res) => {
@@ -48,23 +53,27 @@ app.post("/products", async (req, res) => {
       qty: req.body.qty,
       image: req.body.image,
     });
-    await Product.create(newProduct);
+    await newProduct.save();
     res.send("Product added");
-    // res.send(newProduct);
   } catch (err) {
-    console.log("error: ", err);
+    console.log("Error: ", err);
+    res.status(500).send("Internal Server Error");
   }
 });
 
-//USERS
+// Users
 router.options("/userslist", cors());
+
 app.get("/userslist", async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  await User.find({}, (err, result) => {
-    console.log("users from db: ", result);
-
-    res.send(result);
-  });
+  try {
+    const users = await User.find({});
+    console.log("Users from DB: ", users);
+    res.send(users);
+  } catch (err) {
+    console.error("Error retrieving users from DB: ", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.post("/user", async (req, res) => {
@@ -77,11 +86,11 @@ app.post("/user", async (req, res) => {
       gender: req.body.gender,
       phone: req.body.phone,
     });
-    await User.create(newUser);
+    await newUser.save();
     res.send("User added");
-    // res.send(newProduct);
   } catch (err) {
-    console.log("error: ", err);
+    console.log("Error: ", err);
+    res.status(500).send("Internal Server Error");
   }
 });
 

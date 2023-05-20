@@ -15,7 +15,7 @@ const productSchema = new Schema({
     required: true,
     validate(value) {
       if (value < 0) {
-        throw new Error("Price must be positive number");
+        throw new Error("Price must be a positive number");
       }
     },
   },
@@ -24,7 +24,7 @@ const productSchema = new Schema({
     default: 0,
     validate(value) {
       if (value < 0) {
-        throw new Error("Quantity must be positive number");
+        throw new Error("Quantity must be a positive number");
       }
     },
   },
@@ -34,6 +34,6 @@ const productSchema = new Schema({
   },
 });
 
-const Product = mongoose.model("product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
