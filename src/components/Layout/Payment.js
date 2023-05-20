@@ -4,10 +4,14 @@ import "./Login.css";
 import Button from "@mui/material/Button";
 import Popup from "./Popup";
 import { Grid, Paper, Avatar, TextField } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { goToPage } from "../../models/Shopping/shopping-actions";
+import {
+  goToPage,
+  totalCartCount,
+  clearCart,
+} from "../../models/Shopping/shopping-actions";
+
 import { PAGES } from "./../../config/config";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 
@@ -38,14 +42,26 @@ function Payment(props) {
   };
 
   const onClickReturn = () => {
+    dispatch(totalCartCount(0));
+    dispatch(clearCart());
     dispatch(goToPage(PAGES.HomePage));
+  };
+
+  const handlePaymentButtonClick = () => {
+    const login_user = localStorage.getItem("login_user");
+
+    if (!login_user) {
+      alert("Please log in before placing a food order.");
+    } else {
+      setButtonPopup(true);
+    }
   };
 
   return (
     <div className="loginIcon">
       <LoginIcon style={{ color: "white" }} />
       <Button
-        onClick={() => setButtonPopup(true)}
+        onClick={handlePaymentButtonClick}
         className="registerTxt"
         variant="contained"
       >
@@ -88,21 +104,6 @@ function Payment(props) {
         </Popup>
       </form>
     </div>
-    // <form>
-    //   <div>
-    //     <label for="card-number">Card Number:</label>
-    //     <input type="text" id="card-number" name="card-number" />
-    //   </div>
-    //   <div>
-    //     <label for="card-expiry">Expiration Date:</label>
-    //     <input type="text" id="card-expiry" name="card-expiry" />
-    //   </div>
-    //   <div>
-    //     <label for="card-cvc">CVC:</label>
-    //     <input type="text" id="card-cvc" name="card-cvc" />
-    //   </div>
-    //   <button type="submit">Submit Payment</button>
-    // </form>
   );
 }
 

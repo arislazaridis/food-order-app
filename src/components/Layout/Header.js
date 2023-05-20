@@ -1,33 +1,31 @@
-import {
-  Fragment,
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-} from "react";
+import { Fragment, useState, useEffect, createContext } from "react";
 import mealsImage from "../../assets/meals5.gif";
 import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 import Login from "./Login";
 import Register from "./Register";
+import { useDispatch } from "react-redux";
+import { totalCartCount } from "../../models/Shopping/shopping-actions";
 
 import { useSelector } from "react-redux";
 import CallInfo from "./CallInfo";
-import Cart from "./../Cart/Cart";
 
 function Header(props) {
-  const CartContext = createContext();
   const [cartCount, setCartCount] = useState(0);
   const cart = useSelector((state) => state.shop.cart);
+  const cartCountStore = useSelector((state) => state.shop.cartCount);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let count = 0;
 
     cart.forEach((item) => {
       count += item.qty;
+      dispatch(totalCartCount(count));
       setCartCount(count);
     });
-  }, [cart, cartCount, setCartCount]);
+  }, [cart, cartCount, setCartCount, totalCartCount]);
 
   return (
     <Fragment>
@@ -40,7 +38,11 @@ function Header(props) {
           <CallInfo />
           <Login />
           <Register />
-          <HeaderCartButton totalAmount={cartCount} />
+          <HeaderCartButton
+            totalAmount={
+              cartCountStore?.cartCount ? cartCountStore?.cartCount : 0
+            }
+          />
         </div>
       </header>
       <div className={classes["main-image"]}>

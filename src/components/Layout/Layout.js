@@ -1,15 +1,12 @@
-import { useEffect } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { goToPage } from "../../models/routing/actions";
 import { PAGES } from "../../config/config";
 import Header from "./Header";
 import Meals from "../Meals/Meals";
 import Cart from "../Cart/Cart";
-import Payment from "./Payment";
 
 function Layout(props) {
-  const { page, goToPage, setUsersData } = props;
+  const { page } = props;
 
   return (
     <>
@@ -29,7 +26,6 @@ function Layout(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     page: state.shop.page,
   };

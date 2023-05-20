@@ -15,7 +15,11 @@ function MealItem(props) {
         <div className={classes.price}>{props.price}</div>
       </div>
       <div>
-        <MealItemForm onAddtoCart={addToCartHandler} id={props.id} />
+        <MealItemForm
+          onAddtoCart={addToCartHandler}
+          id={props.id}
+          qty={props.qty}
+        />
       </div>
     </li>
   );

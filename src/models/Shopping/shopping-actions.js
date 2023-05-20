@@ -17,6 +17,12 @@ export const addToCart = (itemID, value) => {
   };
 };
 
+export const clearCart = () => {
+  return {
+    type: actionTypes.CLEAR_CART,
+  };
+};
+
 export const removeFromCart = (itemID) => {
   return {
     type: actionTypes.REMOVE_FROM_CART,
@@ -40,6 +46,15 @@ export const loadCurrentItem = (item) => {
   return {
     type: actionTypes.LOAD_CURRENT_ITEM,
     payload: item,
+  };
+};
+
+export const totalCartCount = (cartCount) => {
+  return {
+    type: actionTypes.TOTAL_CART_COUNT,
+    payload: {
+      cartCount: cartCount,
+    },
   };
 };
 

@@ -4,7 +4,10 @@ import CartIcon from "../Cart/CartIcon";
 import { PAGES } from "./../../config/config";
 
 import { useDispatch } from "react-redux";
-import { goToPage } from "../../models/Shopping/shopping-actions";
+import {
+  goToPage,
+  totalCartCount,
+} from "../../models/Shopping/shopping-actions";
 
 function HeaderCartButton(props) {
   const { totalAmount } = props;

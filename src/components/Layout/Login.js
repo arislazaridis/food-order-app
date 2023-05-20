@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginIcon from "@mui/icons-material/Login";
 import "./Login.css";
 import Button from "@mui/material/Button";
 import Popup from "./Popup";
-import { Grid, Paper, Avatar, TextField } from "@mui/material";
+import { Grid, Paper, Avatar, TextField, Dialog } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useState } from "react";
-
-import axios from "axios";
 import { connect } from "react-redux";
 import { setSignInData } from "./../../models/sign-forms/actions";
+import axios from "axios";
 import { API_URL, PAGES } from "./../../config/config";
 import { goToPage } from "./../../models/routing/actions";
 import { setUsersData } from "./../../models/sign-forms/actions";
@@ -18,10 +16,17 @@ const initialErrorStatus = {
   noUser: "",
 };
 
+const initialSuccessStatus = {
+  user: "",
+};
+
 const Login = (props) => {
   const { username, password, setSignInData, goToPage, setUsersData } = props;
 
   const [errors, setErrors] = useState(initialErrorStatus);
+  const [success, setSuccess] = useState(initialSuccessStatus);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   const handleOnChange = (key, value) => {
     setSignInData({ key, value });
@@ -29,7 +34,6 @@ const Login = (props) => {
 
   const getData = async (username, password) => {
     try {
-      console.log(username, password);
       const response = await axios.get(API_URL, {
         params: { username: username, password: password },
       });
@@ -69,11 +73,11 @@ const Login = (props) => {
         id: userResponse[0].id,
       });
 
-      goToPage(PAGES.UserDataPage);
+      // Open the success dialog
+      setOpenDialog(true);
     }
   };
 
-  const [buttonPopup, setButtonPopup] = useState(false);
   const paperStyle = {
     padding: 20,
     height: "55vh",
@@ -83,6 +87,7 @@ const Login = (props) => {
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "8px 0" };
   const marginTop = { marginTop: 24 };
+
   return (
     <div className="loginIcon">
       <LoginIcon style={{ color: "white" }} />
@@ -138,6 +143,14 @@ const Login = (props) => {
           </Grid>
         </Popup>
       </form>
+
+      {/* Success Dialog */}
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <div style={{ padding: 20 }}>
+          <h2>Success</h2>
+          <p>{`Login successful, welcome ${username}!`}</p>
+        </div>
+      </Dialog>
     </div>
   );
 };

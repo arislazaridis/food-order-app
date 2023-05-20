@@ -39,10 +39,21 @@ const shopReducer = (state = INITIAL_STATE, action) => {
           : [...state.cart, { ...item, qty: Number(action.payload.qty) }],
       };
 
+    case actionTypes.CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      };
     case actionTypes.GO_TO_PAGE:
       return {
         ...state,
         page: action.payload,
+      };
+
+    case actionTypes.TOTAL_CART_COUNT:
+      return {
+        ...state,
+        cartCount: action.payload,
       };
 
     case actionTypes.REMOVE_FROM_CART:
